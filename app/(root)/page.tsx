@@ -1,3 +1,8 @@
 export default function Home() {
-  return <></>;
+  return (
+    <>
+      <section className="pink-container"></section>
+      <h2 className="heading"></h2>
+    </>
+  );
 }
