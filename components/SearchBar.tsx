@@ -1,5 +1,6 @@
 import Form from "next/form";
 import SearchInputResetButton from "./SearchInputResetButton";
+import { Search } from "lucide-react";
 
 function SearchBar({ query }: { query: string }) {
   return (
@@ -14,7 +15,7 @@ function SearchBar({ query }: { query: string }) {
         <div>
           {true && <SearchInputResetButton />}
           <button type="submit" className="search-btn text-white">
-            Search
+            <Search className="size-5" />
           </button>
         </div>
       </Form>

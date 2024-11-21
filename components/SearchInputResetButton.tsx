@@ -1,3 +1,4 @@
+import { X } from "lucide-react";
 import Link from "next/link";
 
 function SearchInputResetButton() {
@@ -9,7 +10,7 @@ function SearchInputResetButton() {
     <>
       <button type="reset" onClick={inputResetHandler}>
         <Link href="/" className="search-btn text-white">
-          X
+          <X className="size-5" />
         </Link>
       </button>
     </>
