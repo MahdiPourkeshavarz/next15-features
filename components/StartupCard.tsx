@@ -51,7 +51,7 @@ function StartupCard({ post }: { post: StartupCardType }): JSX.Element {
           <Link href={`/?query=${post.category.toLocaleLowerCase()}`}>
             <p className="text-16-medium">{post.category}</p>
           </Link>
-          <Button className="startup-card_btn">
+          <Button className="startup-card_btn" asChild>
             <Link href={`/startup/${post._id}`}>Details</Link>
           </Button>
         </div>

@@ -12,7 +12,7 @@ function SearchBar({ query }: { query: string }) {
           className="search-input"
           placeholder="Search Startups"
         />
-        <div>
+        <div className="flex gap-1">
           {true && <SearchInputResetButton />}
           <button type="submit" className="search-btn text-white">
             <Search className="size-5" />
