@@ -1,9 +1,12 @@
-import { StartupCardType } from "@/types";
 import { formatDate } from "@/utils";
 import { EyeIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { Author, Startup } from "@/sanity/types";
+
+export type StartupCardType = Omit<Startup, "author"> & { author: Author };
+
 function StartupCard({ post }: { post: StartupCardType }): JSX.Element {
   return (
     <>
@@ -29,7 +32,7 @@ function StartupCard({ post }: { post: StartupCardType }): JSX.Element {
           </div>
           <Link href={`/user/${post.author._id}`}>
             <Image
-              src={post.image}
+              src={post.image as string}
               alt="/"
               height={48}
               width={48}
@@ -40,7 +43,7 @@ function StartupCard({ post }: { post: StartupCardType }): JSX.Element {
         <Link href={`/startup/${post._id}`}>
           <p className="startup-card_desc">{post.description}</p>
           <Image
-            src={post.image}
+            src={post.image as string}
             alt="/"
             height={250}
             width={400}
@@ -48,7 +51,7 @@ function StartupCard({ post }: { post: StartupCardType }): JSX.Element {
           />
         </Link>
         <div className="flex-between gap-3 mt-5">
-          <Link href={`/?query=${post.category.toLocaleLowerCase()}`}>
+          <Link href={`/?query=${post.category?.toLocaleLowerCase()}`}>
             <p className="text-16-medium">{post.category}</p>
           </Link>
           <Button className="startup-card_btn" asChild>
