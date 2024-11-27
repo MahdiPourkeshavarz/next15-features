@@ -94,7 +94,7 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
         )}
 
         <Suspense fallback={<Skeleton className="view_skeleton" />}>
-          <View id={id} />
+          <View id={startupId} />
         </Suspense>
       </section>
     </>
