@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
@@ -9,6 +10,9 @@ import { Button } from "./ui/button";
 import { Send } from "lucide-react";
 import { formSchema } from "@/lib/validation";
 import { z } from "zod";
+import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/router";
+import { createIdea } from "@/lib/actions";
 
 function StartupForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -17,6 +21,8 @@ function StartupForm() {
     error: "",
     status: "INITIAL",
   });
+  const { toast } = useToast();
+  const router = useRouter();
 
   async function handleFormSubmit(prevState: any, formData: FormData) {
     try {
@@ -28,13 +34,32 @@ function StartupForm() {
         pitch,
       };
       await formSchema.parseAsync(formValues);
-      console.log("first");
+      const res = await createIdea(prevState, formData, pitch);
+      if (res.status == "SUCCESS") {
+        toast({
+          title: "Success",
+          description: "you have successfully submitted your idea!",
+          variant: "default",
+        });
+        router.push(`/startup/${res._id}`);
+      }
+      return res;
     } catch (e) {
       if (e instanceof z.ZodError) {
         const fieldErrors = e.flatten().fieldErrors;
         setErrors(fieldErrors as unknown as Record<string, string>);
+        toast({
+          title: "Error",
+          description: "please check your inputs and try again",
+          variant: "destructive",
+        });
         return { ...prevState, error: "validation failed", status: "ERROR" };
       }
+      toast({
+        title: "Error",
+        description: "an unexpected error has occurred",
+        variant: "destructive",
+      });
       return {
         ...prevState,
         error: "an unexpected error has occurred",

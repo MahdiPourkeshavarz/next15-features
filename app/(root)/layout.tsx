@@ -7,8 +7,8 @@ function layout({ children }: Readonly<{ children: React.ReactNode }>) {
       <main className="font-work-sans">
         <Navbar />
         {children}
+        <Toaster />
       </main>
-      <Toaster />
     </>
   );
 }
