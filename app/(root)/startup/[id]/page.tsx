@@ -17,6 +17,7 @@ const md = markdownit();
 async function page({ params }: { params: Promise<{ id: string }> }) {
   const startupId = (await params).id;
 
+  // PARALLEL REQUEST
   const [post, { select: editorPosts }] = await Promise.all([
     client.fetch(STARTUP_ID_QUERY, { startupId }),
     client.fetch(PLAYLIST_BY_SLUG_QUERY, {

@@ -22,7 +22,7 @@ function StartupForm() {
     status: "INITIAL",
   });
   const { toast } = useToast();
-  const router = useRouter();
+  // const router = useRouter();
 
   async function handleFormSubmit(prevState: any, formData: FormData) {
     try {
@@ -41,7 +41,7 @@ function StartupForm() {
           description: "you have successfully submitted your idea!",
           variant: "default",
         });
-        router.push(`/startup/${res._id}`);
+        // router.push(`/startup/${res._id}`);
       }
       return res;
     } catch (e) {
